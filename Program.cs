@@ -16,7 +16,6 @@ Pessoa pessoa4 = new Pessoa();
 // Atribuindo valores às propriedades Nome e Sobrenome do objeto pessoa4.
 pessoa4.Nome = "Jamielly";
 pessoa4.Sobrenome = "Dos Reis";
-
 // Instanciando um objeto da classe Curso.
 Curso curso = new Curso();
 // Atribuindo um nome ao curso.

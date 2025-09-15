@@ -10,17 +10,14 @@ namespace ExemploExplorando.models
     {
         // Propriedade Nome que armazena o nome do curso
         public string Nome { get; set; }
-
         // Propriedade Alunos que armazena uma lista de objetos do tipo Pessoa (alunos do curso)
         public List<Pessoa> Alunos { get; set; }
-
         // Método para adicionar um aluno à lista de alunos do curso
         public void AdicionarAluno(Pessoa aluno)
         {
             // Adiciona o objeto aluno à lista Alunos
             Alunos.Add(aluno);
         }
-
         // Método para listar todos os alunos matriculados no curso
         public void ListarAlunos()
         {
@@ -36,7 +33,6 @@ namespace ExemploExplorando.models
                 Console.WriteLine(aluno.NomeCompleto);
             }
         }
-
         // Método para remover um aluno da lista de alunos do curso
         public void RemoverAluno(Pessoa aluno)
         {

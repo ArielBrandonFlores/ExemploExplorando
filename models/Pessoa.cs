@@ -13,19 +13,16 @@ namespace ExemploExplorando.models
         {
 
         }
-
         // Construtor que recebe parâmetros para inicializar as propriedades Nome e Sobrenome
         public Pessoa(string nome, string sobrenome)
         {
             Nome = nome;          // Atribuindo o valor do parâmetro nome à propriedade Nome
             Sobrenome = sobrenome; // Atribuindo o valor do parâmetro sobrenome à propriedade Sobrenome
         }
-
         // Campo privado para armazenar o nome
         private string _nome;
         // Campo privado para armazenar a idade
         private int _idade;
-
         // Propriedade Nome com lógica de validação e formatação
         public string Nome
         {
@@ -42,15 +39,12 @@ namespace ExemploExplorando.models
                 _nome = value; // Atribui o valor à variável privada _nome
             }
         }
-
         // Propriedade Sobrenome com autoimplementação (sem lógica adicional)
         public string Sobrenome { get; set; }
-
         // Propriedade somente leitura que retorna o nome completo em letras maiúsculas
         public string NomeCompleto => $"{Nome} {Sobrenome}".ToUpper();
-
         // Propriedade Idade com lógica de validação
-         public int Idade
+        public int Idade
         {
             get => _idade; // Retorna o valor da idade
 
@@ -61,11 +55,9 @@ namespace ExemploExplorando.models
                 {
                     throw new ArgumentException("A idade não pode ser negativa");
                 }
-
                 _idade = value; // Atribui o valor à variável privada _idade
             }
         }
-
         // Método para apresentar as informações da pessoa
         public void Apresentar()
         {
