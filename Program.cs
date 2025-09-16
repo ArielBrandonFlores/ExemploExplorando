@@ -1,33 +1,45 @@
-﻿using ExemploExplorando.models;
+﻿using ExemploExplorando.models; // Importa o namespace que contém as classe ExemploExcecoesThrow
 
-// Instanciando objetos da classe Pessoa. Existem 3 formas de instanciar objetos:
-// 1. Usando propriedades autoimplementadas.
-// 2. Usando o construtor padrão (sem parâmetros).
-// 3. Usando o construtor com parâmetros (que inicializa as propriedades com valores específicos).
+Console.WriteLine("Tratamento de exceções - Bloco try catch finally"); 
 
-// Criando um objeto da classe Pessoa com o nome "Ariel" e sobrenome "Giron".
-Pessoa pessoa1 = new Pessoa("Ariel", "Giron");
+try
+{
+    // Tenta ler todas as linhas de um arquivo de texto especificado. Armazendo as linhas em um array de strings.
+    string[] linhas = File.ReadAllLines("Arquivo/arquivoLeitura.txt");
 
-// Criando um objeto da classe Pessoa usando nome e sobrenome como parâmetros nomeados.
-Pessoa pessoa2 = new Pessoa(nome: "Maria", sobrenome: "Oliveira");
+    // Itera sobre cada linha lida do arquivo.
+    foreach (var linha in linhas)
+    {
+        // Exibe cada linha no console.
+        Console.WriteLine(linha);
+    }
+}
+catch (FileNotFoundException ex)
+{
+    // Captura e trata a exceção se o arquivo não for encontrado.
+    Console.WriteLine($"Ocorreu um erro: Arquivo não encontrado. Detalhes: {ex.Message}");
+}
+catch (DirectoryNotFoundException ex)
+{
+    // Captura e trata a exceção se o diretório do arquivo não for encontrado.
+    Console.WriteLine($"Ocorreu um erro: Diretório não encontrado. Detalhes: {ex.Message}");
+}
+catch (Exception ex)
+{
+    // Captura e trata qualquer outra exceção genérica que possa ocorrer.
+    Console.WriteLine($"Ocorreu um erro: Erro genérico. Detalhes: {ex.Message}");
+}
+finally
+{
+    // Este bloco é executado sempre, independentemente de uma exceção ter ocorrido ou não.
+    Console.WriteLine("Terminou a leitura do arquivo"); 
+    Console.WriteLine("-------------------------------");
+}
 
-// Criando um objeto da classe Pessoa usando o construtor padrão (sem parâmetros).
-Pessoa pessoa4 = new Pessoa();
-// Atribuindo valores às propriedades Nome e Sobrenome do objeto pessoa4.
-pessoa4.Nome = "Jamielly";
-pessoa4.Sobrenome = "Dos Reis";
-// Instanciando um objeto da classe Curso.
-Curso curso = new Curso();
-// Atribuindo um nome ao curso.
-curso.Nome = "C#";
-// Inicializando a lista de alunos do curso, que irá armazenar objetos do tipo Pessoa.
-curso.Alunos = new List<Pessoa>();
-curso.AdicionarAluno(pessoa1);
-curso.AdicionarAluno(pessoa2);
-curso.AdicionarAluno(pessoa4);
-// Listando todos os alunos matriculados no curso.
-curso.ListarAlunos();
-// Removendo o aluno do curso.
-curso.RemoverAluno(pessoa2);
-// Listando novamente os alunos para verificar se "João Silva" foi removido com sucesso.
-curso.ListarAlunos();
+// Mensagem indicando que o próximo teste de exceções será realizado.
+Console.WriteLine("Testando tratamento de exceções com throw em vários métodos até tratar a exceção");
+
+// Cria uma nova instância da classe ExemploExcecoesThrow e chama o método1.
+new ExemploExcecoesThrow().metodo1();
+
+Console.WriteLine("-------------------------------");
