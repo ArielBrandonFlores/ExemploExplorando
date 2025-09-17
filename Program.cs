@@ -1,45 +1,69 @@
-﻿using ExemploExplorando.models; // Importa o namespace que contém as classe ExemploExcecoesThrow
-
-Console.WriteLine("Tratamento de exceções - Bloco try catch finally"); 
-
-try
+﻿
+Console.WriteLine("Utilizando filas na pratica ");
+Queue<int> fila = new Queue<int>();
+fila.Enqueue(2);
+fila.Enqueue(4);
+fila.Enqueue(6);
+fila.Enqueue(8);
+Console.WriteLine("Elementos da fila:");
+foreach (var item in fila)
 {
-    // Tenta ler todas as linhas de um arquivo de texto especificado. Armazendo as linhas em um array de strings.
-    string[] linhas = File.ReadAllLines("Arquivo/arquivoLeitura.txt");
+    Console.WriteLine(item);
+}
+Console.WriteLine($"Removendo o primeiro elemento da fila: {fila.Dequeue()}");
+Console.WriteLine("Adicionando o elemento 10 na fila");
+fila.Enqueue(10);
+Console.WriteLine("Elementos da fila após remoção e adição:");
 
-    // Itera sobre cada linha lida do arquivo.
-    foreach (var linha in linhas)
-    {
-        // Exibe cada linha no console.
-        Console.WriteLine(linha);
-    }
-}
-catch (FileNotFoundException ex)
+foreach (var item in fila)
 {
-    // Captura e trata a exceção se o arquivo não for encontrado.
-    Console.WriteLine($"Ocorreu um erro: Arquivo não encontrado. Detalhes: {ex.Message}");
+    Console.WriteLine(item);
 }
-catch (DirectoryNotFoundException ex)
-{
-    // Captura e trata a exceção se o diretório do arquivo não for encontrado.
-    Console.WriteLine($"Ocorreu um erro: Diretório não encontrado. Detalhes: {ex.Message}");
-}
-catch (Exception ex)
-{
-    // Captura e trata qualquer outra exceção genérica que possa ocorrer.
-    Console.WriteLine($"Ocorreu um erro: Erro genérico. Detalhes: {ex.Message}");
-}
-finally
-{
-    // Este bloco é executado sempre, independentemente de uma exceção ter ocorrido ou não.
-    Console.WriteLine("Terminou a leitura do arquivo"); 
-    Console.WriteLine("-------------------------------");
-}
-
-// Mensagem indicando que o próximo teste de exceções será realizado.
-Console.WriteLine("Testando tratamento de exceções com throw em vários métodos até tratar a exceção");
-
-// Cria uma nova instância da classe ExemploExcecoesThrow e chama o método1.
-new ExemploExcecoesThrow().metodo1();
-
+Console.WriteLine($"O próximo elemento a ser removido é: {fila.Peek()}");
 Console.WriteLine("-------------------------------");
+
+Console.WriteLine("Utilizando pilhas na pratica ");
+Stack<int> pilha = new Stack<int>();
+pilha.Push(2);
+pilha.Push(4);
+pilha.Push(6);
+pilha.Push(8);
+Console.WriteLine("Elementos da pilha:");
+foreach (var item in pilha)
+{
+    Console.WriteLine(item);
+}
+Console.WriteLine($"Removendo o topo da pilha: {pilha.Pop()}");
+Console.WriteLine("Adicionando o elemento 10 na pilha");
+pilha.Push(10);
+Console.WriteLine("Elementos da pilha após remoção e adição:");
+foreach (var item in pilha)
+{
+    Console.WriteLine(item);
+}
+Console.WriteLine($"O próximo elemento a ser removido é: {pilha.Peek()}");
+Console.WriteLine("-------------------------------");
+Console.WriteLine("Utilizando dicionários na pratica ");
+Dictionary<string, string> dicionario = new Dictionary<string, string>();
+dicionario.Add(key: "br", value: "Brasil");
+dicionario.Add("us", "Estados Unidos");
+dicionario.Add("fr", "França");
+dicionario.Add("ar", "Argentina");
+Console.WriteLine("Elementos do dicionário:");
+foreach (var item in dicionario)
+{
+    Console.WriteLine($"Chave: {item.Key}, Valor: {item.Value}");
+}
+Console.WriteLine("Removendo o elemento com chave 'ar'");
+dicionario.Remove("ar");
+Console.WriteLine("Adicionando o elemento com chave 'uk' e valor 'Reino Unido'");
+dicionario.Add("uk", "Reino Unido");
+Console.WriteLine("Elementos do dicionário após remoção e adição:");
+
+foreach (var item in dicionario)
+{
+    Console.WriteLine($"Chave: {item.Key}, Valor: {item.Value}");
+}
+Console.WriteLine($"O valor associado à chave 'us' é: {dicionario["us"]}");
+Console.WriteLine("-------------------------------");
+
