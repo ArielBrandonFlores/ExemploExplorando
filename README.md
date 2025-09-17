@@ -1,117 +1,88 @@
-# Projeto de Tratamento de Exceções em C#
+# Exemplo de Uso de Filas, Pilhas e Dicionários em C#
 
-Este projeto tem como objetivo demonstrar o tratamento de exceções em C# utilizando as estruturas `try`, `catch` e `finally`. O código foi desenvolvido como parte de um exercício prático para explorar o funcionamento das exceções e como propagá-las através de métodos.
+Este repositório contém exemplos práticos de como utilizar filas, pilhas e dicionários em C#. O código demonstra a criação, manipulação e operações básicas dessas estruturas de dados, que são fundamentais em programação.
 
-## Estrutura do Projeto
+## Estruturas de Dados Utilizadas
 
-O projeto é composto por duas classes principais:
+### 1. Filas (Queue)
 
-1. **Program**: Contém o método principal (`Main`) que executa a leitura de um arquivo e implementa o tratamento de exceções.
-2. **ExemploExcecoesThrow**: Demonstra o uso de exceções com `throw`, propagando-as através de uma cadeia de métodos.
+- **Descrição**: As filas são estruturas de dados do tipo FIFO (First In, First Out). O primeiro elemento adicionado é o primeiro a ser removido.
+- **Uso**: Utilizadas em situações como gerenciamento de tarefas, filas de atendimento, e processamento de eventos.
 
-## Funcionalidades
+### 2. Pilhas (Stack)
 
-### Tratamento de Exceções
+- **Descrição**: As pilhas são estruturas de dados do tipo LIFO (Last In, First Out). O último elemento adicionado é o primeiro a ser removido.
+- **Uso**: Comuns em operações de desfazer ações, controle de chamadas de funções, e algoritmos de backtracking.
 
-- **Leitura de Arquivo**: O código tenta ler um arquivo de texto e exibe seu conteúdo no console. Se o arquivo ou diretório não for encontrado, uma exceção específica é capturada e uma mensagem de erro é exibida.
-- **Propagação de Exceções**: A classe `ExemploExcecoesThrow` demonstra como uma exceção pode ser lançada em um método (`metodo4`) e propagada de volta através de outros métodos (`metodo3` e `metodo2`) até ser tratada no método `metodo1`.
-- **Uso do Bloco `finally`**: Garante que uma mensagem de conclusão seja exibida, independentemente de uma exceção ter sido lançada ou não.
+### 3. Dicionários (Dictionary)
+
+- **Descrição**: Os dicionários armazenam pares chave-valor, onde cada chave é única e usada para acessar o valor correspondente.
+- **Uso**: Úteis para armazenar dados associados, como uma tabela de consulta, configuração de parâmetros, ou mapeamento de dados.
 
 ## Código
 
 ### Exemplo de Uso
 
-Aqui está um exemplo de como o código funciona:
+O código a seguir ilustra como cada uma dessas estruturas pode ser utilizada:
 
 ```csharp
-using ExemploExplorando.models; // Importa o namespace que contém as classes necessárias.
-using System.Data; // Importa o namespace para manipulação de dados.
-
-Console.WriteLine("Tratamento de exceções - Bloco try catch finally");
-try
+// Exemplo de uso de filas
+Queue<int> fila = new Queue<int>();
+fila.Enqueue(2);
+fila.Enqueue(4);
+fila.Enqueue(6);
+fila.Enqueue(8);
+Console.WriteLine("Elementos da fila:");
+foreach (var item in fila)
 {
-    string[] linhas = File.ReadAllLines("Arquivo/arquivoLeitura.txt");
-    foreach (var linha in linhas)
-    {
-        Console.WriteLine(linha);
-    }
+    Console.WriteLine(item);
 }
-catch (FileNotFoundException ex)
+Console.WriteLine($"Removendo o primeiro elemento da fila: {fila.Dequeue()}");
+fila.Enqueue(10);
+Console.WriteLine("Elementos da fila após remoção e adição:");
+foreach (var item in fila)
 {
-    Console.WriteLine($"Ocorreu um erro: Arquivo não encontrado. Detalhes: {ex.Message}");
+    Console.WriteLine(item);
 }
-catch (DirectoryNotFoundException ex)
+Console.WriteLine($"O próximo elemento a ser removido é: {fila.Peek()}");
+
+// Exemplo de uso de pilhas
+Stack<int> pilha = new Stack<int>();
+pilha.Push(2);
+pilha.Push(4);
+pilha.Push(6);
+pilha.Push(8);
+Console.WriteLine("Elementos da pilha:");
+foreach (var item in pilha)
 {
-    Console.WriteLine($"Ocorreu um erro: Diretório não encontrado. Detalhes: {ex.Message}");
+    Console.WriteLine(item);
 }
-catch (Exception ex)
+Console.WriteLine($"Removendo o topo da pilha: {pilha.Pop()}");
+pilha.Push(10);
+Console.WriteLine("Elementos da pilha após remoção e adição:");
+foreach (var item in pilha)
 {
-    Console.WriteLine($"Ocorreu um erro: Erro genérico. Detalhes: {ex.Message}");
+    Console.WriteLine(item);
 }
-finally
+Console.WriteLine($"O próximo elemento a ser removido é: {pilha.Peek()}");
+
+// Exemplo de uso de dicionários
+Dictionary<string, string> dicionario = new Dictionary<string, string>();
+dicionario.Add("br", "Brasil");
+dicionario.Add("us", "Estados Unidos");
+dicionario.Add("fr", "França");
+dicionario.Add("ar", "Argentina");
+Console.WriteLine("Elementos do dicionário:");
+foreach (var item in dicionario)
 {
-    Console.WriteLine("Terminou a leitura do arquivo");
-    Console.WriteLine("-------------------------------");
+    Console.WriteLine($"Chave: {item.Key}, Valor: {item.Value}");
 }
-
-// Testando tratamento de exceções com throw
-new ExemploExcecoesThrow().metodo1();
-```
-
-### Estrutura das Classes
-
-#### Classe `ExemploExcecoesThrow`
-
-```csharp
-public class ExemploExcecoesThrow
+dicionario.Remove("ar");
+dicionario.Add("uk", "Reino Unido");
+Console.WriteLine("Elementos do dicionário após remoção e adição:");
+foreach (var item in dicionario)
 {
-    public void metodo1()
-    {
-        try
-        {
-            metodo2();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Exceção tratada: {ex.Message}");
-        }
-        finally
-        {
-            Console.WriteLine("Chegou no bloco finally");
-        }
-    }
-
-    public void metodo2()
-    {
-        metodo3();
-    }
-
-    public void metodo3()
-    {
-        metodo4();
-    }
-
-    public void metodo4()
-    {
-        throw new Exception("Ocorreu um erro na aplicação");
-    }
+    Console.WriteLine($"Chave: {item.Key}, Valor: {item.Value}");
 }
-```
+Console.WriteLine($"O valor associado à chave 'us' é: {dicionario["us"]}");
 
-## Como Executar o Projeto
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seuusuario/seurepositorio.git
-   ```
-
-2. Navegue até o diretório do projeto:
-   ```bash
-   cd seurepositorio
-   ```
-
-3. Abra o projeto no seu IDE preferido (por exemplo, Visual Studio).
-
-4. Certifique-se de que o arquivo `arquivoLeitura.txt` esteja na pasta `Arquivo`.
-
-5. Compile e execute o projeto.
