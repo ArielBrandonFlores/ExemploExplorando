@@ -1,69 +1,52 @@
-﻿
-Console.WriteLine("Utilizando filas na pratica ");
-Queue<int> fila = new Queue<int>();
-fila.Enqueue(2);
-fila.Enqueue(4);
-fila.Enqueue(6);
-fila.Enqueue(8);
-Console.WriteLine("Elementos da fila:");
-foreach (var item in fila)
-{
-    Console.WriteLine(item);
-}
-Console.WriteLine($"Removendo o primeiro elemento da fila: {fila.Dequeue()}");
-Console.WriteLine("Adicionando o elemento 10 na fila");
-fila.Enqueue(10);
-Console.WriteLine("Elementos da fila após remoção e adição:");
+﻿using ExemploExplorando.models;
+using ExemploExplorando.Models;
 
-foreach (var item in fila)
-{
-    Console.WriteLine(item);
-}
-Console.WriteLine($"O próximo elemento a ser removido é: {fila.Peek()}");
-Console.WriteLine("-------------------------------");
+Console.WriteLine("Exemplo de Tuplas");
+(int Id, string Nome, string Sobrenome, decimal Altura) tuopla = (1, "Ariel", "Brandon", 1.64m);
 
-Console.WriteLine("Utilizando pilhas na pratica ");
-Stack<int> pilha = new Stack<int>();
-pilha.Push(2);
-pilha.Push(4);
-pilha.Push(6);
-pilha.Push(8);
-Console.WriteLine("Elementos da pilha:");
-foreach (var item in pilha)
-{
-    Console.WriteLine(item);
-}
-Console.WriteLine($"Removendo o topo da pilha: {pilha.Pop()}");
-Console.WriteLine("Adicionando o elemento 10 na pilha");
-pilha.Push(10);
-Console.WriteLine("Elementos da pilha após remoção e adição:");
-foreach (var item in pilha)
-{
-    Console.WriteLine(item);
-}
-Console.WriteLine($"O próximo elemento a ser removido é: {pilha.Peek()}");
-Console.WriteLine("-------------------------------");
-Console.WriteLine("Utilizando dicionários na pratica ");
-Dictionary<string, string> dicionario = new Dictionary<string, string>();
-dicionario.Add(key: "br", value: "Brasil");
-dicionario.Add("us", "Estados Unidos");
-dicionario.Add("fr", "França");
-dicionario.Add("ar", "Argentina");
-Console.WriteLine("Elementos do dicionário:");
-foreach (var item in dicionario)
-{
-    Console.WriteLine($"Chave: {item.Key}, Valor: {item.Value}");
-}
-Console.WriteLine("Removendo o elemento com chave 'ar'");
-dicionario.Remove("ar");
-Console.WriteLine("Adicionando o elemento com chave 'uk' e valor 'Reino Unido'");
-dicionario.Add("uk", "Reino Unido");
-Console.WriteLine("Elementos do dicionário após remoção e adição:");
+// ValueTuple<int, string, string, decimal> segundaTupla = (1, "Ariel", "Brandon", 1.64m);
+// var terceiraTupla = Tuple.Create(1, "Ariel", "Brandon", 1.64m);
 
-foreach (var item in dicionario)
-{
-    Console.WriteLine($"Chave: {item.Key}, Valor: {item.Value}");
-}
-Console.WriteLine($"O valor associado à chave 'us' é: {dicionario["us"]}");
-Console.WriteLine("-------------------------------");
+Console.WriteLine($"Id : {tuopla.Id}");
+Console.WriteLine($"Nome : {tuopla.Nome}");
+Console.WriteLine($"Sobrenome : {tuopla.Sobrenome}");
+Console.WriteLine($"Altura : {tuopla.Altura}");
+Console.WriteLine("------------------------------------------------------------------");
 
+Console.WriteLine("Exemplo de um método que retorna uma Tupla");
+LeituraArquivo arquivo = new LeituraArquivo();
+var (sucesso, linhas, _) = arquivo.LerArquivo("Arquivo/arquivoLeitura.txt");
+if (sucesso)
+{
+    // Console.WriteLine($"Quantidade de linhas do arquivo: {quantidade}");
+    foreach (var linha in linhas)
+    {
+        Console.WriteLine(linha);
+    }
+}
+else
+{
+    Console.WriteLine("Não foi possível ler o arquivo");
+}
+Console.WriteLine("------------------------------------------------------------------");
+Console.WriteLine("Exemplo de Deconstruct com tuplas");
+
+Pessoa pessoa = new Pessoa("Ariel", "Brandon");
+(string nome, string sobrenome) = pessoa;
+
+Console.WriteLine($"Nome: {nome} Sobrenome: {sobrenome}");
+Console.WriteLine("------------------------------------------------------------------");
+Console.WriteLine("Exemplo de if simplificado com operador ternário");
+int numero = 10;
+bool par = numero % 2 == 0;
+
+Console.WriteLine($"O numero {numero} é" + (par ? "Par" : "Impar"));
+
+if (numero % 2 == 0)
+{
+    Console.WriteLine($"Número par: {numero}");
+}
+else
+{
+    Console.WriteLine($"Número ímpar: {numero}");
+}

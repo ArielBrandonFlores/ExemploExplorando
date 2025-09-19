@@ -1,88 +1,85 @@
-# Exemplo de Uso de Filas, Pilhas e Dicionários em C#
+# Exemplo de Uso de Tuplas, Operador Ternário e Desconstrução em C#
 
-Este repositório contém exemplos práticos de como utilizar filas, pilhas e dicionários em C#. O código demonstra a criação, manipulação e operações básicas dessas estruturas de dados, que são fundamentais em programação.
+Este repositório demonstra, de forma prática e objetiva, conceitos modernos da linguagem C#, como tuplas, operador ternário e desconstrução. O projeto foi desenvolvido com foco em clareza e boas práticas, sendo ideal para quem deseja entender e aplicar esses recursos no dia a dia profissional.
 
-## Estruturas de Dados Utilizadas
+## Principais Conceitos Demonstrados
 
-### 1. Filas (Queue)
+### 1. Tuplas
 
-- **Descrição**: As filas são estruturas de dados do tipo FIFO (First In, First Out). O primeiro elemento adicionado é o primeiro a ser removido.
-- **Uso**: Utilizadas em situações como gerenciamento de tarefas, filas de atendimento, e processamento de eventos.
+- **O que são?**  
+    Tuplas permitem agrupar múltiplos valores de tipos diferentes em uma única variável, facilitando o retorno de múltiplos dados sem criar estruturas adicionais.
 
-### 2. Pilhas (Stack)
+- **Exemplo:**
+    ```csharp
+    (int Id, string Nome, string Sobrenome, decimal Altura) tupla = (1, "Ariel", "Brandon", 1.64m);
+    Console.WriteLine($"Id : {tupla.Id}");
+    Console.WriteLine($"Nome : {tupla.Nome}");
+    Console.WriteLine($"Sobrenome : {tupla.Sobrenome}");
+    Console.WriteLine($"Altura : {tupla.Altura}");
+    ```
 
-- **Descrição**: As pilhas são estruturas de dados do tipo LIFO (Last In, First Out). O último elemento adicionado é o primeiro a ser removido.
-- **Uso**: Comuns em operações de desfazer ações, controle de chamadas de funções, e algoritmos de backtracking.
+### 2. Operador Ternário
 
-### 3. Dicionários (Dictionary)
+- **O que é?**  
+    O operador ternário simplifica estruturas condicionais, tornando o código mais enxuto e legível.
 
-- **Descrição**: Os dicionários armazenam pares chave-valor, onde cada chave é única e usada para acessar o valor correspondente.
-- **Uso**: Úteis para armazenar dados associados, como uma tabela de consulta, configuração de parâmetros, ou mapeamento de dados.
+- **Exemplo:**
+    ```csharp
+    int numero = 10;
+    bool par = numero % 2 == 0;
+    Console.WriteLine($"O número {numero} é " + (par ? "Par" : "Ímpar"));
+    ```
 
-## Código
+### 3. Desconstrução de Tuplas
 
-### Exemplo de Uso
+- **O que é?**  
+    Permite extrair valores de uma tupla diretamente em variáveis separadas, tornando o código mais limpo e intuitivo.
 
-O código a seguir ilustra como cada uma dessas estruturas pode ser utilizada:
+- **Exemplo:**
+    ```csharp
+    Pessoa pessoa = new Pessoa("Ariel", "Brandon");
+    (string nome, string sobrenome) = pessoa;
+    Console.WriteLine($"Nome: {nome} Sobrenome: {sobrenome}");
+    ```
+
+## Código Completo de Demonstração
 
 ```csharp
-// Exemplo de uso de filas
-Queue<int> fila = new Queue<int>();
-fila.Enqueue(2);
-fila.Enqueue(4);
-fila.Enqueue(6);
-fila.Enqueue(8);
-Console.WriteLine("Elementos da fila:");
-foreach (var item in fila)
-{
-    Console.WriteLine(item);
-}
-Console.WriteLine($"Removendo o primeiro elemento da fila: {fila.Dequeue()}");
-fila.Enqueue(10);
-Console.WriteLine("Elementos da fila após remoção e adição:");
-foreach (var item in fila)
-{
-    Console.WriteLine(item);
-}
-Console.WriteLine($"O próximo elemento a ser removido é: {fila.Peek()}");
+using ExemploExplorando.models;
+using ExemploExplorando.Models;
 
-// Exemplo de uso de pilhas
-Stack<int> pilha = new Stack<int>();
-pilha.Push(2);
-pilha.Push(4);
-pilha.Push(6);
-pilha.Push(8);
-Console.WriteLine("Elementos da pilha:");
-foreach (var item in pilha)
-{
-    Console.WriteLine(item);
-}
-Console.WriteLine($"Removendo o topo da pilha: {pilha.Pop()}");
-pilha.Push(10);
-Console.WriteLine("Elementos da pilha após remoção e adição:");
-foreach (var item in pilha)
-{
-    Console.WriteLine(item);
-}
-Console.WriteLine($"O próximo elemento a ser removido é: {pilha.Peek()}");
+Console.WriteLine("Exemplo de Tuplas");
+(int Id, string Nome, string Sobrenome, decimal Altura) tupla = (1, "Ariel", "Brandon", 1.64m);
+Console.WriteLine($"Id : {tupla.Id}");
+Console.WriteLine($"Nome : {tupla.Nome}");
+Console.WriteLine($"Sobrenome : {tupla.Sobrenome}");
+Console.WriteLine($"Altura : {tupla.Altura}");
+Console.WriteLine("------------------------------------------------------------------");
 
-// Exemplo de uso de dicionários
-Dictionary<string, string> dicionario = new Dictionary<string, string>();
-dicionario.Add("br", "Brasil");
-dicionario.Add("us", "Estados Unidos");
-dicionario.Add("fr", "França");
-dicionario.Add("ar", "Argentina");
-Console.WriteLine("Elementos do dicionário:");
-foreach (var item in dicionario)
+Console.WriteLine("Exemplo de um método que retorna uma Tupla");
+LeituraArquivo arquivo = new LeituraArquivo();
+var (sucesso, linhas, _) = arquivo.LerArquivo("Arquivo/arquivoLeitura.txt");
+if (sucesso)
 {
-    Console.WriteLine($"Chave: {item.Key}, Valor: {item.Value}");
+        foreach (var linha in linhas)
+        {
+                Console.WriteLine(linha);
+        }
 }
-dicionario.Remove("ar");
-dicionario.Add("uk", "Reino Unido");
-Console.WriteLine("Elementos do dicionário após remoção e adição:");
-foreach (var item in dicionario)
+else
 {
-    Console.WriteLine($"Chave: {item.Key}, Valor: {item.Value}");
+        Console.WriteLine("Não foi possível ler o arquivo");
 }
-Console.WriteLine($"O valor associado à chave 'us' é: {dicionario["us"]}");
+Console.WriteLine("------------------------------------------------------------------");
 
+Console.WriteLine("Exemplo de Deconstruct com tuplas");
+Pessoa pessoa = new Pessoa("Ariel", "Brandon");
+(string nome, string sobrenome) = pessoa;
+Console.WriteLine($"Nome: {nome} Sobrenome: {sobrenome}");
+Console.WriteLine("------------------------------------------------------------------");
+
+Console.WriteLine("Exemplo de if simplificado com operador ternário");
+int numero = 10;
+bool par = numero % 2 == 0;
+Console.WriteLine($"O número {numero} é " + (par ? "Par" : "Ímpar"));
+```
