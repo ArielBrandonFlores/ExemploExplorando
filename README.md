@@ -1,85 +1,96 @@
-# Exemplo de Uso de Tuplas, Operador Ternário e Desconstrução em C#
+# 📦 Projeto de Serialização e Desserialização em C#
 
-Este repositório demonstra, de forma prática e objetiva, conceitos modernos da linguagem C#, como tuplas, operador ternário e desconstrução. O projeto foi desenvolvido com foco em clareza e boas práticas, sendo ideal para quem deseja entender e aplicar esses recursos no dia a dia profissional.
+Este projeto foi desenvolvido como parte do meu aprendizado em **C#**, com foco na **serialização e desserialização de objetos utilizando JSON**, por meio da biblioteca **Newtonsoft.Json**. O objetivo principal foi entender como converter objetos C# para JSON e vice-versa, permitindo persistência e troca de dados de maneira eficiente.
 
-## Principais Conceitos Demonstrados
+## 🛠️ Tecnologias Utilizadas
 
-### 1. Tuplas
+- **C#** – Linguagem de programação utilizada no projeto.
+- **.NET** – Plataforma de desenvolvimento.
+- **[Newtonsoft.Json](https://www.newtonsoft.com/json)** – Biblioteca para manipulação de dados em formato JSON.
 
-- **O que são?**  
-    Tuplas permitem agrupar múltiplos valores de tipos diferentes em uma única variável, facilitando o retorno de múltiplos dados sem criar estruturas adicionais.
+## ✅ Funcionalidades Implementadas
 
-- **Exemplo:**
-    ```csharp
-    (int Id, string Nome, string Sobrenome, decimal Altura) tupla = (1, "Ariel", "Brandon", 1.64m);
-    Console.WriteLine($"Id : {tupla.Id}");
-    Console.WriteLine($"Nome : {tupla.Nome}");
-    Console.WriteLine($"Sobrenome : {tupla.Sobrenome}");
-    Console.WriteLine($"Altura : {tupla.Altura}");
-    ```
+### 🔹 1. Definição da Classe `Venda`
+A classe `Venda` representa uma venda de produto e possui as seguintes propriedades:
 
-### 2. Operador Ternário
+- `Id` (int): Identificador único da venda.
+- `Produto` (string): Nome do produto vendido.
+- `Preco` (decimal): Preço do produto.
+- `DataVenda` (DateTime): Data da venda.
 
-- **O que é?**  
-    O operador ternário simplifica estruturas condicionais, tornando o código mais enxuto e legível.
 
-- **Exemplo:**
-    ```csharp
-    int numero = 10;
-    bool par = numero % 2 == 0;
-    Console.WriteLine($"O número {numero} é " + (par ? "Par" : "Ímpar"));
-    ```
+### 🔹 2. Serialização
+- Criação de uma lista de objetos `Venda`.
+- Conversão dessa lista para uma string JSON formatada utilizando `JsonConvert.SerializeObject`.
+- Armazenamento do JSON gerado em um arquivo: `Arquivo/listaVendas.json`.
 
-### 3. Desconstrução de Tuplas
 
-- **O que é?**  
-    Permite extrair valores de uma tupla diretamente em variáveis separadas, tornando o código mais limpo e intuitivo.
+### 🔹 3. Desserialização
+- Leitura do arquivo `listaVendas.json`.
+- Conversão do conteúdo JSON de volta para uma lista de objetos `Venda` com `JsonConvert.DeserializeObject`.
+- Impressão das informações das vendas desserializadas no console para validação.
 
-- **Exemplo:**
-    ```csharp
-    Pessoa pessoa = new Pessoa("Ariel", "Brandon");
-    (string nome, string sobrenome) = pessoa;
-    Console.WriteLine($"Nome: {nome} Sobrenome: {sobrenome}");
-    ```
 
-## Código Completo de Demonstração
+## 💻 Exemplo de Código
+
+### Classe `Venda`
+```csharp
+namespace ExemploExplorando.models
+{
+    public class Venda
+    {
+        public Venda(int id, string produto, decimal preco, DateTime dataVenda)
+        {
+            Id = id;
+            Produto = produto;
+            Preco = preco;
+            DataVenda = dataVenda;
+        }
+
+        public int Id { get; set; }
+        public string Produto { get; set; }
+        public decimal Preco { get; set; }
+        public DateTime DataVenda { get; set; }
+    }
+}
+````
+
+### Uso no Programa Principal
 
 ```csharp
-using ExemploExplorando.models;
-using ExemploExplorando.Models;
+Console.WriteLine("Exercício de serialização e desserialização em C# com JSON usando Newtonsoft.Json\n");
 
-Console.WriteLine("Exemplo de Tuplas");
-(int Id, string Nome, string Sobrenome, decimal Altura) tupla = (1, "Ariel", "Brandon", 1.64m);
-Console.WriteLine($"Id : {tupla.Id}");
-Console.WriteLine($"Nome : {tupla.Nome}");
-Console.WriteLine($"Sobrenome : {tupla.Sobrenome}");
-Console.WriteLine($"Altura : {tupla.Altura}");
-Console.WriteLine("------------------------------------------------------------------");
-
-Console.WriteLine("Exemplo de um método que retorna uma Tupla");
-LeituraArquivo arquivo = new LeituraArquivo();
-var (sucesso, linhas, _) = arquivo.LerArquivo("Arquivo/arquivoLeitura.txt");
-if (sucesso)
+DateTime dataAtual = DateTime.Now;
+List<Venda> listaVendas = new List<Venda>
 {
-        foreach (var linha in linhas)
-        {
-                Console.WriteLine(linha);
-        }
-}
-else
+    new Venda(1, "Notebook", 3500.00m, dataAtual),
+    new Venda(2, "Smartphone", 2500.00m, dataAtual),
+    new Venda(3, "Tablet", 1500.00m, dataAtual),
+    new Venda(4, "Monitor", 1200.00m, dataAtual),
+    new Venda(5, "Teclado", 200.00m, dataAtual),
+    new Venda(6, "Mouse", 100.00m, dataAtual)
+};
+
+// Exibe a lista original
+foreach (var venda in listaVendas)
 {
-        Console.WriteLine("Não foi possível ler o arquivo");
+    Console.WriteLine($"Id: {venda.Id}, Produto: {venda.Produto}, Preço: {venda.Preco}, Data: {venda.DataVenda}");
 }
-Console.WriteLine("------------------------------------------------------------------");
 
-Console.WriteLine("Exemplo de Deconstruct com tuplas");
-Pessoa pessoa = new Pessoa("Ariel", "Brandon");
-(string nome, string sobrenome) = pessoa;
-Console.WriteLine($"Nome: {nome} Sobrenome: {sobrenome}");
-Console.WriteLine("------------------------------------------------------------------");
+// Serializa e salva em arquivo
+string serializadoLista = JsonConvert.SerializeObject(listaVendas, Formatting.Indented);
+File.WriteAllText("Arquivo/listaVendas.json", serializadoLista);
+Console.WriteLine("\nSerialização concluída!");
 
-Console.WriteLine("Exemplo de if simplificado com operador ternário");
-int numero = 10;
-bool par = numero % 2 == 0;
-Console.WriteLine($"O número {numero} é " + (par ? "Par" : "Ímpar"));
+// Lê e desserializa o arquivo
+string jsonString = File.ReadAllText("Arquivo/listaVendas.json");
+List<Venda> desserializadoLista = JsonConvert.DeserializeObject<List<Venda>>(jsonString);
+
+// Exibe os dados desserializados
+foreach (var vendaDesserializada in desserializadoLista)
+{
+    Console.WriteLine($"Id: {vendaDesserializada.Id}, Produto: {vendaDesserializada.Produto}, Preço: {vendaDesserializada.Preco}, Data: {vendaDesserializada.DataVenda}");
+}
+
+Console.WriteLine($"\n{desserializadoLista.Count} vendas desserializadas com sucesso!");
 ```

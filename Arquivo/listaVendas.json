@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 1,
+    "Produto": "Notebook",
+    "Preco": 3500.00,
+    "DataVenda": "2025-09-22T00:56:07.7410776-03:00"
+  },
+  {
+    "Id": 2,
+    "Produto": "Smartphone",
+    "Preco": 2500.00,
+    "DataVenda": "2025-09-22T00:56:07.7410776-03:00"
+  },
+  {
+    "Id": 3,
+    "Produto": "Tablet",
+    "Preco": 1500.00,
+    "DataVenda": "2025-09-22T00:56:07.7410776-03:00"
+  },
+  {
+    "Id": 4,
+    "Produto": "Monitor",
+    "Preco": 1200.00,
+    "DataVenda": "2025-09-22T00:56:07.7410776-03:00"
+  },
+  {
+    "Id": 5,
+    "Produto": "Teclado",
+    "Preco": 200.00,
+    "DataVenda": "2025-09-22T00:56:07.7410776-03:00"
+  },
+  {
+    "Id": 6,
+    "Produto": "Mouse",
+    "Preco": 100.00,
+    "DataVenda": "2025-09-22T00:56:07.7410776-03:00"
+  }
+]
